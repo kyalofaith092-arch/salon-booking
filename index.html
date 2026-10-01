@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faith Salon - Booking & Styles</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+        <div class="login-container">
+            <div class="logo">
+                <h1>Faith Salon</h1>
+                <p>Your Beauty, Our Passion</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label for="role">I am a:</label>
+                    <select id="role" required>
+                        <option value="">Select Role</option>
+                        <option value="customer">Customer</option>
+                        <option value="salonist">Salonist</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p id="login-message" class="auth-message" role="alert" aria-live="polite"></p>
+                <p class="auth-links"><a href="#" id="forgot-password-link">Forgot password?</a></p>
+                <p class="register-text">Don't have an account? <a href="#" id="register-link">Register</a></p>
+                <p class="auth-note">Accounts are saved in this browser only.</p>
+            </form>
+            <form id="reset-password-form" hidden>
+                <h2>Reset password</h2>
+                <p class="auth-note">Enter the recovery answer you created when registering.</p>
+                <div class="form-group">
+                    <label for="reset-username">Username</label>
+                    <input type="text" id="reset-username" required autocomplete="username" placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="recovery-answer">Recovery answer</label>
+                    <input type="password" id="recovery-answer" required autocomplete="off" placeholder="Enter your recovery answer">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New password</label>
+                    <input type="password" id="new-password" required autocomplete="new-password" placeholder="Enter a new password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-password">Confirm new password</label>
+                    <input type="password" id="confirm-new-password" required autocomplete="new-password" placeholder="Re-enter your new password">
+                </div>
+                <button type="submit" class="btn-primary">Reset Password</button>
+                <p id="reset-message" class="auth-message" role="alert" aria-live="polite"></p>
+                <p class="register-text"><a href="#" id="back-to-login-link">Back to login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Customer Dashboard -->
+    <div id="customer-dashboard" class="page">
+        <nav class="navbar">
+            <div class="nav-brand">Faith Salon</div>
+            <div class="nav-links">
+                <span id="customer-name">Welcome, Customer</span>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h2>Customer Dashboard</h2>
+                <p>Request your favorite hairstyle!</p>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="form-section">
+                    <h3>Request a Hairstyle</h3>
+                    <form id="request-form">
+                        <div class="form-group">
+                            <label for="style-name">Hairstyle Name</label>
+                            <input type="text" id="style-name" required placeholder="e.g., knoteless, Twist Out">
+                        </div>
+                        <div class="form-group">
+                            <label for="style-description">Description</label>
+                            <textarea id="style-description" rows="3" required placeholder="Describe the style you want..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferred-date">Preferred Date</label>
+                            <input type="date" id="preferred-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-notes">Additional Notes</label>
+                            <textarea id="customer-notes" rows="2" placeholder="Any special requests..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inspiration-image">Inspiration Picture (optional)</label>
+                            <input type="file" id="inspiration-image" accept="image/*">
+                            <img id="inspiration-image-preview" class="image-preview" alt="Inspiration preview" hidden>
+                        </div>
+                        <button type="submit" class="btn-primary">Submit Request</button>
+                    </form>
+                </div>
+
+                <div class="list-section">
+                    <h3>Available Styles from Salonists</h3>
+                    <div id="available-styles" class="styles-grid"></div>
+                </div>
+
+                <div class="list-section">
+                    <h3>My Requests</h3>
+                    <div id="my-requests" class="requests-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Salonist Dashboard -->
+    <div id="salonist-dashboard" class="page">
+        <nav class="navbar">
+            <div class="nav-brand">Faith Salon</div>
+            <div class="nav-links">
+                <span id="salonist-name">Welcome, Salonist</span>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h2>Salonist Dashboard</h2>
+                <p>Post your hairstyle offerings</p>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="form-section">
+                    <h3>Post a New Hairstyle</h3>
+                    <form id="post-style-form">
+                        <div class="form-group">
+                            <label for="post-style-name">Hairstyle Name</label>
+                            <input type="text" id="post-style-name" required placeholder="e.g., knoteless, Twist Out">
+                        </div>
+                        <div class="form-group">
+                            <label for="post-style-description">Description</label>
+                            <textarea id="post-style-description" rows="3" required placeholder="Describe this hairstyle..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="style-price">Price (KSh)</label>
+                            <input type="number" id="style-price" required placeholder="e.g., 1500" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="style-duration">Duration</label>
+                            <input type="text" id="style-duration" required placeholder="e.g., 2 hours">
+                        </div>
+                        <div class="form-group">
+                            <label for="posted-style-image">Hairstyle Picture (optional)</label>
+                            <input type="file" id="posted-style-image" accept="image/*">
+                            <img id="posted-style-image-preview" class="image-preview" alt="Hairstyle preview" hidden>
+                        </div>
+                        <button type="submit" class="btn-primary">Post Style</button>
+                    </form>
+                </div>
+
+                <div class="list-section">
+                    <h3>My Posted Styles</h3>
+                    <div id="my-styles" class="styles-grid"></div>
+                </div>
+
+                <div class="list-section">
+                    <h3>Customer Requests</h3>
+                    <div id="customer-requests" class="requests-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bottom-nav" aria-label="Page navigation">
+        <button type="button" id="previous-page" aria-label="Go to previous page" disabled>Previous</button>
+        <span id="page-indicator" aria-live="polite">Sign in</span>
+        <button type="button" id="next-page" aria-label="Go to next page" disabled>Next</button>
+        <button type="button" id="exit-site" class="exit-button">Exit</button>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
